@@ -10,6 +10,26 @@ I wanted a fix for this glitch without having to power on and lug a computer to 
 An Arduino microcontroller not only consumes much less power than a traditional computer, but it also makes for a much lighter and more durable device - so much so that you could even mount it to your e-kit with the right 3D printed enclosure.
 
 # Hardware Setup
-I/O: USB-B from the e-kit goes into the Arduino via USB-A. USB-A from the MPA goes into the Xbox as normal, but the MIDI goes into the Arduino either via a MIDI to USB-A adapter, or a MIDI cable directly.
 
-The USB-B port outputs the MIDI to the Arduino, where the script will adjust the cymbal output times, then send the cymbal signals back to the MPA directly. The MPA then sends said signals to the Xbox.
+Other slightly different setups *may* work with this Arduino code; however, below is the setup I tested in order to make this work.
+
+Arduino: An Uno with a MIDI shield attached. I used the MIDI shield's MIDI IN and OUT ports.
+
+I/O: 
+ - USB from the e-kit goes into the Arduino USB in order to supply power. You could use an external battery if you wanted to; however, I felt that using the e-kit's USB port was more seamless.
+ - MIDI cable from the e-kit into the MIDI-IN port of the Arduino. I *think* you could use a USB to MIDI converter cable if your e-kit does not have a MIDI port, but I haven't tested this for myself.
+ - A second MIDI cable going from the MIDI-OUT port of the Arduino into the MIDI port of the MPA.
+ - MPA USB goes into the console as normal.
+
+The script within the Arduino will adjust the cymbal output times, then send the cymbal signals back to the MPA directly. The MPA then sends said signals to the Xbox as normal.
+
+# Arduino Script
+
+To upload the included script successfully onto an Uno (or whatever board you intend to use), you will need the AsyncTimer and MIDI library. You can find both in the library search window (via Sketch -> Include Library -> Manage Libraries), or you can visit their repos [here](https://github.com/Aasim-A/AsyncTimer) and [here](https://github.com/FortySevenEffects/arduino_midi_library), respectively.
+
+# Acknowledgements
+
+I would like to recognize the following people for their help in making this project possible:
+ - [Aasim-A](https://github.com/Aasim-A), for creating the Arduino AsyncTimer library.
+ - [FortySevenEffects](https://github.com/FortySevenEffects), for creating the Arduino MIDI library.
+ - [bookreader52](https://www.youtube.com/channel/UC1EuxOVixdHZ0ENcvJJ3n1g/), for providing the JS code for his web autoflam script, as well as walking me through (and providing) the ideal hardware setup for this project.
